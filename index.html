@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aim Trainer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 遊戲統計列 -->
+    <header id="gameUI">
+        <div class="stat">
+            <span>分數 SCORE</span>
+            <strong id="score">0</strong>
+        </div>
+
+        <div class="stat">
+            <span>剩餘時間 TIME</span>
+            <strong><span id="time">30</span>s</strong>
+        </div>
+
+        <div class="stat">
+            <span>命中 HIT</span>
+            <strong id="hit">0</strong>
+        </div>
+
+        <div class="stat">
+            <span>失誤 MISS</span>
+            <strong id="miss">0</strong>
+        </div>
+
+        <div class="stat">
+            <span>命中率 ACCURACY</span>
+            <strong id="accuracy">0%</strong>
+        </div>
+
+        <div class="stat">
+            <span>平均反應時間 AVG RT</span>
+            <strong id="avgReaction">--</strong>
+        </div>
+    </header>
+
+    <!-- 遊戲畫布 -->
+    <main>
+        <canvas id="gameCanvas"></canvas>
+    </main>
+
+    <!-- 開始畫面 -->
+    <section id="startPanel" class="panel">
+        <h1>AIM TRAINER</h1>
+
+        <p id="modeName">GRID SHOT</p>
+
+        <p>選擇訓練模式，挑戰你的瞄準速度與準確度。</p>
+
+        <div class="modeSelector">
+            <button
+                type="button"
+                class="modeButton selected"
+                data-mode="grid">
+                第一關：網格射擊
+            </button>
+
+            <button
+                type="button"
+                class="modeButton"
+                data-mode="six">
+                第二關：六連射
+            </button>
+            <button
+                type="button"
+                class="modeButton"
+                data-mode="horizontalFlick">
+                第三關：水平甩槍
+        </button>
+        <button
+                type="button"
+                class="modeButton"
+                data-mode="sizeFlick">
+                第四關：大小隨機甩槍
+        </button>
+        </div>
+
+        <button id="startButton">開始訓練</button>
+    </section>
+
+    <!-- 結算畫面 -->
+    <section id="resultPanel" class="panel" hidden>
+        <h1>訓練結束</h1>
+
+        <p id="resultModeName">GRID SHOT · 訓練報告</p>
+
+        <div class="resultGrid">
+            <div class="resultItem">
+                <span>總分 SCORE</span>
+                <strong id="finalScore">0</strong>
+            </div>
+
+            <div class="resultItem">
+                <span>命中 HIT</span>
+                <strong id="finalHit">0</strong>
+            </div>
+
+            <div class="resultItem">
+                <span>失誤 MISS</span>
+                <strong id="finalMiss">0</strong>
+            </div>
+
+            <div class="resultItem">
+                <span>命中率 ACCURACY</span>
+                <strong id="finalAccuracy">0%</strong>
+            </div>
+
+            <div class="resultItem fullWidth">
+                <span>平均反應時間 AVG RT</span>
+                <strong id="finalReaction">--</strong>
+            </div>
+        </div>
+
+        <button id="restartButton">再訓練一次</button>
+        <button id="backButton" class="secondaryButton">返回模式選擇</button>
+    </section>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
