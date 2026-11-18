@@ -79,11 +79,58 @@
                 data-mode="sizeFlick">
                 第四關：大小隨機甩槍
         </button>
-        </div>
+        <button
+                type="button"
+                class="modeButton"
+                data-mode="horizontalTracking">
+                第五關：左右跟槍
+        </button>
 
+        <button
+                type="button"
+                class="modeButton"
+                data-mode="verticalTracking">
+                第六關：上下跟槍
+        </button>
+        
+        <button
+                type="button"
+                class="modeButton"
+                data-mode="multiShot">
+                第七關：多重射擊
+        </button>
+        <button
+            type="button"
+            class="modeButton"
+            data-mode="bounceTracking">
+            第八關：彈跳球訓練
+        </button>
+        <button 
+            class="modeButton" 
+            data-mode="angleHold">
+            第九關：架槍訓練
+        </button>
+        <button
+            type="button"
+            class="modeButton"
+            data-mode="personalMenu">
+            第十關：個人訓練菜單
+        </button>
+        </div>
         <button id="startButton">開始訓練</button>
     </section>
+    <!-- 第十關：個人訓練菜單 -->
+    <section id="personalMenuPanel" class="panel" hidden>
+        <h1>個人訓練菜單</h1>
 
+        <p>根據前九關的訓練成績，安排你的練習次數。</p>
+
+        <div id="personalMenuContent"></div>
+
+        <button id="personalMenuBackButton" class="secondaryButton">
+            返回模式選擇
+        </button>
+    </section>
     <!-- 結算畫面 -->
     <section id="resultPanel" class="panel" hidden>
         <h1>訓練結束</h1>

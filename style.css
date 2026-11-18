@@ -1,30 +1,59 @@
+/* ========================================
+   AIM TRAINER - AIMLABS INSPIRED UI
+======================================== */
+
+:root {
+    --bg: #0b0f14;
+    --bg-secondary: #111821;
+    --panel: #151e29;
+    --panel-hover: #1c2937;
+    --border: #263443;
+
+    --primary: #63edaa;
+    --primary-hover: #83ffc0;
+
+    --text: #f1f5f9;
+    --muted: #8493a5;
+
+    --radius: 12px;
+}
+
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    background: #11151c;
-    color: #f3f5f7;
+    background:
+        radial-gradient(ellipse at 70% 0%, #172b2a 0%, transparent 42%),
+        var(--bg);
+    color: var(--text);
     font-family: Arial, "Noto Sans TC", sans-serif;
     overflow: hidden;
 }
+
+/* ========================================
+   GAME HUD
+======================================== */
 
 #gameUI {
     position: fixed;
     top: 0;
     left: 0;
     z-index: 5;
+
     width: 100%;
     min-height: 76px;
-    padding: 12px 20px;
+    padding: 12px 30px;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
-    flex-wrap: wrap;
-    background: rgba(15, 19, 26, 0.96);
-    border-bottom: 1px solid #303744;
+    gap: 48px;
+
+    background: rgba(10, 15, 21, 0.96);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
 }
 
 .stat {
@@ -34,13 +63,15 @@ body {
 }
 
 .stat span {
-    color: #9da8b8;
-    font-size: 11px;
-    letter-spacing: 1px;
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    font-weight: bold;
 }
 
 .stat strong {
-    font-size: 20px;
+    color: var(--primary);
+    font-size: 21px;
     font-variant-numeric: tabular-nums;
 }
 
@@ -53,56 +84,179 @@ body {
     cursor: crosshair;
 }
 
-.panel {
+/* ========================================
+   HOME DASHBOARD
+======================================== */
+
+#startPanel {
     position: fixed;
+    inset: 0;
     z-index: 10;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: min(440px, calc(100% - 32px));
-    max-height: calc(100vh - 32px);
+
+    width: 100%;
+    height: 100%;
+    max-height: none;
+
+    padding: 55px clamp(24px, 6vw, 100px);
     overflow-y: auto;
-    padding: 30px;
-    text-align: center;
-    background: #1c232e;
-    border: 1px solid #3a4555;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+
+    transform: none;
+    top: 0;
+    left: 0;
+
+    text-align: left;
+
+    background:
+        radial-gradient(ellipse at 80% 5%, rgba(65, 220, 151, 0.09), transparent 40%),
+        linear-gradient(135deg, #101923, #0b1017 65%);
+
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
 }
 
-.panel h1 {
-    margin: 0 0 8px;
-    font-size: 28px;
+#startPanel h1 {
+    margin: 0;
+    color: var(--primary);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 900;
+    letter-spacing: 5px;
+}
+
+#startPanel > p:first-of-type {
+    margin-top: 12px;
+    color: #e5edf5;
+    font-size: 18px;
+    font-weight: bold;
     letter-spacing: 2px;
 }
 
-.panel p {
-    color: #aab5c5;
-    line-height: 1.6;
+#startPanel > p:nth-of-type(2) {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 14px;
 }
 
-/* 模式選擇 */
+/* 模式選擇區 */
+
 .modeSelector {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 35px;
 }
 
-button {
-    margin-top: 18px;
-    padding: 13px 28px;
+/* 訓練模式卡片 */
+
+.modeSelector .modeButton {
+    position: relative;
+
+    min-height: 115px;
+    width: 100%;
+    margin: 0;
+    padding: 22px;
+
+    display: flex;
+    align-items: flex-end;
+    text-align: left;
+
+    background:
+        linear-gradient(145deg, #1a2734, #121b25);
+
+    color: #e4edf6;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.modeSelector .modeButton::before {
+    content: "TRAINING MODE";
+    position: absolute;
+    top: 18px;
+    left: 22px;
+
+    color: #74869a;
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.modeSelector .modeButton:hover {
+    transform: translateY(-4px);
+    background: linear-gradient(145deg, #233746, #17232e);
+    border-color: #4c8f78;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.modeSelector .modeButton.selected {
+    background:
+        linear-gradient(145deg, #1c4437, #142b27);
+
+    color: var(--primary);
+    border: 1px solid var(--primary);
+
+    box-shadow:
+        0 0 0 1px rgba(99, 237, 170, 0.1),
+        0 8px 25px rgba(52, 211, 153, 0.08);
+}
+
+/* 第十關 */
+
+.modeSelector .modeButton[data-mode="personalMenu"] {
+    border-color: #4d806d;
+    background:
+        linear-gradient(135deg, #1c3c35, #17242b);
+}
+
+.modeSelector .modeButton[data-mode="personalMenu"]::before {
+    content: "PERSONAL TRAINING";
+    color: var(--primary);
+}
+
+/* 開始訓練 */
+
+#startButton {
+    width: min(280px, 100%);
+    margin-top: 35px;
+    padding: 17px 30px;
+
+    background: var(--primary);
+    color: #07130e;
+
     border: none;
     border-radius: 8px;
-    background: #57e3a0;
-    color: #101720;
+
     font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+    font-weight: 900;
+    letter-spacing: 1px;
+
+    transition: 0.2s ease;
 }
 
-button:hover {
-    background: #7af0b6;
+#startButton:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(99, 237, 170, 0.2);
+}
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+button {
+    cursor: pointer;
+    font-family: inherit;
 }
 
 button:focus-visible {
@@ -110,69 +264,85 @@ button:focus-visible {
     outline-offset: 3px;
 }
 
-.modeSelector .modeButton {
-    width: 100%;
-    margin-top: 0;
-    background: #293342;
-    color: #dce4ee;
-    border: 1px solid #3a4555;
-}
-
-.modeSelector .modeButton:hover {
-    background: #354356;
-}
-
-.modeSelector .modeButton.selected {
-    background: #244b3b;
-    color: #7af0b6;
-    border-color: #57e3a0;
-}
-
-#startButton,
-#restartButton,
-#backButton {
-    width: 100%;
-}
-
 .secondaryButton {
-    margin-top: 10px;
-    background: #293342;
-    color: #dce4ee;
+    background: #253343;
+    color: #dce6f0;
+    border: 1px solid var(--border);
 }
 
 .secondaryButton:hover {
-    background: #354356;
+    background: #33485c;
 }
 
-[hidden] {
-    display: none !important;
+/* ========================================
+   RESULT / PERSONAL MENU PANEL
+======================================== */
+
+.panel:not(#startPanel) {
+    position: fixed;
+    z-index: 12;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: min(760px, calc(100% - 32px));
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+
+    padding: 35px;
+
+    background:
+        linear-gradient(145deg, #192431, #111923);
+
+    border: 1px solid #344454;
+    border-radius: 16px;
+
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.65);
 }
 
-/* 結算面板 */
+.panel h1 {
+    margin: 0 0 12px;
+    color: var(--primary);
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+
+.panel p {
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+/* 結算數據 */
+
 .resultGrid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 24px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 25px;
     text-align: left;
 }
 
 .resultItem {
-    padding: 14px;
-    background: #111720;
-    border-radius: 8px;
+    padding: 18px;
+    background: #0e151e;
+    border: 1px solid #263544;
+    border-radius: 10px;
+
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 9px;
 }
 
 .resultItem span {
-    color: #9da8b8;
-    font-size: 12px;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 1px;
 }
 
 .resultItem strong {
-    font-size: 24px;
+    color: var(--primary);
+    font-size: 25px;
     font-variant-numeric: tabular-nums;
 }
 
@@ -180,7 +350,95 @@ button:focus-visible {
     grid-column: 1 / -1;
 }
 
-@media (max-width: 700px) {
+/* 個人菜單 */
+
+#personalMenuContent {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 25px;
+    text-align: left;
+}
+
+#personalMenuContent .resultItem {
+    margin-bottom: 0 !important;
+}
+
+#personalMenuContent .resultItem strong {
+    font-size: 17px;
+}
+
+#personalMenuContent .resultItem p {
+    margin: 0;
+    font-size: 13px;
+}
+
+.practiceButton {
+    width: 100%;
+    margin-top: 8px;
+    padding: 11px;
+
+    background: #214c3b;
+    color: var(--primary);
+
+    border: 1px solid #38785c;
+    border-radius: 7px;
+
+    font-weight: bold;
+}
+
+.practiceButton:hover {
+    background: #2d684e;
+}
+
+/* ========================================
+   HIDDEN
+======================================== */
+
+[hidden] {
+    display: none !important;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+    .modeSelector {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #startPanel {
+        padding: 35px 25px;
+    }
+}
+
+@media (max-width: 600px) {
+    #startPanel {
+        padding: 28px 18px;
+    }
+
+    #startPanel h1 {
+        font-size: 30px;
+    }
+
+    .modeSelector {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .modeSelector .modeButton {
+        min-height: 90px;
+    }
+
+    #personalMenuContent {
+        grid-template-columns: 1fr;
+    }
+
+    .panel:not(#startPanel) {
+        padding: 22px;
+    }
+
     #gameUI {
         justify-content: flex-start;
         gap: 12px 20px;
@@ -195,31 +453,20 @@ button:focus-visible {
         top: 110px;
         height: calc(100% - 110px);
     }
-
-    .panel {
-        padding: 22px;
-    }
 }
 
-@media (max-height: 600px) {
-    .panel {
-        padding: 18px;
+@media (max-height: 650px) {
+    #startPanel {
+        padding-top: 25px;
+        padding-bottom: 25px;
     }
 
-    .panel h1 {
-        font-size: 24px;
+    .modeSelector {
+        margin-top: 20px;
+        gap: 10px;
     }
 
-    .resultGrid {
-        gap: 8px;
-        margin-top: 12px;
-    }
-
-    .resultItem {
-        padding: 10px;
-    }
-
-    .resultItem strong {
-        font-size: 20px;
+    .modeSelector .modeButton {
+        min-height: 85px;
     }
 }
